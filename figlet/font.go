@@ -60,7 +60,13 @@ func (this *FontManager) loadBuildInFont() error {
 	return nil
 }
 
-func (this *FontManager) loadDiskFont(fontName, fontFilePath string) error {
+func (this *FontManager) loadDiskFont(fontName string) error {
+
+	fontFilePath, ok := this.fontList[fontName]
+	if !ok {
+		return errors.New("FontName Not Found.")
+	}
+
 	// read full file content
 	fileBuf, err := ioutil.ReadFile(fontFilePath)
 	if err != nil {
@@ -105,4 +111,62 @@ func (this *FontManager) parseFontContent(cont string) (*Font, error) {
 	font.FontSlice = lines[commentEndLine+1:]
 
 	return font, nil
+}
+
+func (this *FontManager) getFont(fontName string) (*Font, error) {
+	font, ok := this.fontLib[fontName]
+	if !ok {
+		err := this.loadDiskFont(fontName)
+		if err != nil {
+			font, _ := this.fontLib["default"]
+			return font, nil
+		}
+	}
+	font, _ = this.fontLib[fontName]
+	return font, nil
+}
+
+func (this *FontManager) convertChar(font *Font, char rune) ([]string, error) {
+
+	if char < 0 || char > 127 {
+		return nil, errors.New("Not Ascii")
+	}
+
+	height := font.Height
+	begintRow := (int(char) - 32) * height
+
+	word := make([]string, height, height)
+
+	for i := 0; i < height; i++ {
+		row := font.FontSlice[begintRow+i]
+		row = strings.Replace(row, "@", "", -1)
+		row = strings.Replace(row, font.Hardblank, " ", -1)
+		word[i] = row
+	}
+
+	return word, nil
+}
+
+func (this *FontManager) ConvertString(fontName, asciiStr string) (string, error) {
+
+	font, _ := this.getFont(fontName)
+
+	wordlist := make([][]string, 0)
+	for _, char := range asciiStr {
+		word, err := this.convertChar(font, char)
+		if err != nil {
+			return "", err
+		}
+		wordlist = append(wordlist, word)
+	}
+
+	result := ""
+
+	for i := 0; i < font.Height; i++ {
+		for j := 0; j < len(wordlist); j++ {
+			result += wordlist[j][i]
+		}
+		result += "\n"
+	}
+	return result, nil
 }
