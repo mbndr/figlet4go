@@ -1,13 +1,16 @@
 package figlet
 
 import (
-	//"github.com/fatih/color"
 	"errors"
+	"fmt"
+	"github.com/fatih/color"
 	"strings"
 )
 
 type RenderOptions struct {
-	FontName string
+	FontName string // font name
+
+	FontColor []color.Attribute // every ascii byte's color
 }
 
 func NewRenderOptions() *RenderOptions {
@@ -78,9 +81,18 @@ func (this *AsciiRender) render(asciiStr string, opt *RenderOptions) (string, er
 
 	result := ""
 
+	wordColorFunc := make([]func(a ...interface{}) string, len(wordlist))
+	for i, _ := range wordColorFunc {
+		if i < len(opt.FontColor) {
+			wordColorFunc[i] = color.New(opt.FontColor[i]).SprintFunc()
+		} else {
+			wordColorFunc[i] = fmt.Sprint
+		}
+	}
+
 	for i := 0; i < font.height; i++ {
 		for j := 0; j < len(wordlist); j++ {
-			result += wordlist[j][i]
+			result += wordColorFunc[j]((wordlist[j][i]))
 		}
 		result += "\n"
 	}
