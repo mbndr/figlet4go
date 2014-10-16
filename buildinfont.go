@@ -1,4 +1,4 @@
-package figlet
+package figlet4go
 
 // Build in source font
 func buildInFont() string {
