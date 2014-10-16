@@ -1,7 +1,7 @@
 package figlet
 
 // Build in source font
-func BuildInFont() string {
+func buildInFont() string {
 	// from starwars.flf
 	var str = `flf2a$ 7 6 22 15 4` + "\n" +
 		`starwars.flf by Ryan Youck (youck@cs.uregina.ca) Dec 25/1994` + "\n" +

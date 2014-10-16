@@ -9,24 +9,24 @@ import (
 	"strings"
 )
 
-type Font struct {
-	Hardblank string
-	Height    int
-	FontSlice []string
+type font struct {
+	hardblank string
+	height    int
+	fontSlice []string
 }
 
-type FontManager struct {
+type fontManager struct {
 	// font library
-	fontLib map[string]*Font
+	fontLib map[string]*font
 
 	// font name to path
 	fontList map[string]string
 }
 
-func NewFontManager() *FontManager {
-	this := &FontManager{}
+func newFontManager() *fontManager {
+	this := &fontManager{}
 
-	this.fontLib = make(map[string]*Font)
+	this.fontLib = make(map[string]*font)
 	this.fontList = make(map[string]string)
 	this.loadBuildInFont()
 
@@ -34,7 +34,7 @@ func NewFontManager() *FontManager {
 }
 
 // walk through the path, load all the *.flf font file
-func (this *FontManager) LoadFont(fontPath string) error {
+func (this *fontManager) loadFont(fontPath string) error {
 
 	return filepath.Walk(fontPath, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
@@ -51,8 +51,8 @@ func (this *FontManager) LoadFont(fontPath string) error {
 	})
 }
 
-func (this *FontManager) loadBuildInFont() error {
-	font, err := this.parseFontContent(BuildInFont())
+func (this *fontManager) loadBuildInFont() error {
+	font, err := this.parseFontContent(buildInFont())
 	if err != nil {
 		return err
 	}
@@ -60,7 +60,7 @@ func (this *FontManager) loadBuildInFont() error {
 	return nil
 }
 
-func (this *FontManager) loadDiskFont(fontName string) error {
+func (this *fontManager) loadDiskFont(fontName string) error {
 
 	fontFilePath, ok := this.fontList[fontName]
 	if !ok {
@@ -82,7 +82,7 @@ func (this *FontManager) loadDiskFont(fontName string) error {
 	return nil
 }
 
-func (this *FontManager) parseFontContent(cont string) (*Font, error) {
+func (this *fontManager) parseFontContent(cont string) (*font, error) {
 	lines := strings.Split(cont, "\n")
 	if len(lines) < 1 {
 		return nil, errors.New("font content error")
@@ -103,17 +103,17 @@ func (this *FontManager) parseFontContent(cont string) (*Font, error) {
 
 	header := strings.Split(lines[0], " ")
 
-	font := &Font{}
-	font.Hardblank = header[0][len(header)-1:]
-	font.Height, _ = strconv.Atoi(header[1])
+	font := &font{}
+	font.hardblank = header[0][len(header)-1:]
+	font.height, _ = strconv.Atoi(header[1])
 
 	commentEndLine, _ := strconv.Atoi(header[5])
-	font.FontSlice = lines[commentEndLine+1:]
+	font.fontSlice = lines[commentEndLine+1:]
 
 	return font, nil
 }
 
-func (this *FontManager) getFont(fontName string) (*Font, error) {
+func (this *fontManager) getFont(fontName string) (*font, error) {
 	font, ok := this.fontLib[fontName]
 	if !ok {
 		err := this.loadDiskFont(fontName)
@@ -124,49 +124,4 @@ func (this *FontManager) getFont(fontName string) (*Font, error) {
 	}
 	font, _ = this.fontLib[fontName]
 	return font, nil
-}
-
-func (this *FontManager) convertChar(font *Font, char rune) ([]string, error) {
-
-	if char < 0 || char > 127 {
-		return nil, errors.New("Not Ascii")
-	}
-
-	height := font.Height
-	begintRow := (int(char) - 32) * height
-
-	word := make([]string, height, height)
-
-	for i := 0; i < height; i++ {
-		row := font.FontSlice[begintRow+i]
-		row = strings.Replace(row, "@", "", -1)
-		row = strings.Replace(row, font.Hardblank, " ", -1)
-		word[i] = row
-	}
-
-	return word, nil
-}
-
-func (this *FontManager) ConvertString(fontName, asciiStr string) (string, error) {
-
-	font, _ := this.getFont(fontName)
-
-	wordlist := make([][]string, 0)
-	for _, char := range asciiStr {
-		word, err := this.convertChar(font, char)
-		if err != nil {
-			return "", err
-		}
-		wordlist = append(wordlist, word)
-	}
-
-	result := ""
-
-	for i := 0; i < font.Height; i++ {
-		for j := 0; j < len(wordlist); j++ {
-			result += wordlist[j][i]
-		}
-		result += "\n"
-	}
-	return result, nil
 }
