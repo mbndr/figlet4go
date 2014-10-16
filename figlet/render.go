@@ -27,12 +27,19 @@ func NewAsciiRender() *AsciiRender {
 	return this
 }
 
+// walk through the path, load all the *.flf font file
 func (this *AsciiRender) LoadFont(fontPath string) error {
 	return this.fontMgr.loadFont(fontPath)
 }
 
+// render with default options
 func (this *AsciiRender) Render(asciiStr string) (string, error) {
 	return this.render(asciiStr, NewRenderOptions())
+}
+
+// render with options
+func (this *AsciiRender) RenderOpts(asciiStr string, opts *RenderOptions) (string, error) {
+	return this.render(asciiStr, opts)
 }
 
 func (this *AsciiRender) convertChar(font *font, char rune) ([]string, error) {
