@@ -52,7 +52,7 @@ func (this *fontManager) loadFont(fontPath string) error {
 }
 
 func (this *fontManager) loadBuildInFont() error {
-	font, err := this.parseFontContent(buildInFont())
+	font, err := this.parseFontContent(builtInFont)
 	if err != nil {
 		return err
 	}
