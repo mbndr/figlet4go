@@ -104,7 +104,7 @@ func (this *fontManager) parseFontContent(cont string) (*font, error) {
 	header := strings.Split(lines[0], " ")
 
 	font := &font{}
-	font.hardblank = header[0][len(header)-1:]
+	font.hardblank = header[0][len(header[0])-1:]
 	font.height, _ = strconv.Atoi(header[1])
 
 	commentEndLine, _ := strconv.Atoi(header[5])
