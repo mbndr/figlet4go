@@ -9,20 +9,22 @@ import (
 	"strings"
 )
 
+// Represents a single font
 type font struct {
 	hardblank string
 	height    int
 	fontSlice []string
 }
 
+// Holds the fonts
 type fontManager struct {
-	// font library
+	// Font libraries
 	fontLib map[string]*font
-
-	// font name to path
+	// Font name to path
 	fontList map[string]string
 }
 
+// Create new fontmanager
 func newFontManager() *fontManager {
 	this := &fontManager{}
 
@@ -33,7 +35,7 @@ func newFontManager() *fontManager {
 	return this
 }
 
-// walk through the path, load all the *.flf font file
+// Load all font *.flf files in the fontPath recursivly
 func (this *fontManager) loadFont(fontPath string) error {
 
 	return filepath.Walk(fontPath, func(path string, info os.FileInfo, err error) error {
@@ -51,8 +53,14 @@ func (this *fontManager) loadFont(fontPath string) error {
 	})
 }
 
+// Load the default font
 func (this *fontManager) loadBuildInFont() error {
-	font, err := this.parseFontContent(builtInFont)
+	fontStr, err := Asset("standard.flf")
+	if err != nil {
+		panic(err)
+	}
+
+	font, err := this.parseFontContent(string(fontStr))
 	if err != nil {
 		return err
 	}
@@ -60,6 +68,7 @@ func (this *fontManager) loadBuildInFont() error {
 	return nil
 }
 
+// Load a font from disk
 func (this *fontManager) loadDiskFont(fontName string) error {
 
 	fontFilePath, ok := this.fontList[fontName]
@@ -82,6 +91,7 @@ func (this *fontManager) loadDiskFont(fontName string) error {
 	return nil
 }
 
+// Parse a font from a content string
 func (this *fontManager) parseFontContent(cont string) (*font, error) {
 	lines := strings.Split(cont, "\n")
 	if len(lines) < 1 {
@@ -113,6 +123,7 @@ func (this *fontManager) parseFontContent(cont string) (*font, error) {
 	return font, nil
 }
 
+// Get a font by name
 func (this *fontManager) getFont(fontName string) (*font, error) {
 	font, ok := this.fontLib[fontName]
 	if !ok {
