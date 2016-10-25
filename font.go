@@ -9,6 +9,8 @@ import (
 	"strings"
 )
 
+const defaultFontName string = "standard"
+
 // Represents a single font
 type font struct {
 	hardblank string
@@ -64,7 +66,7 @@ func (this *fontManager) loadBuildInFont() error {
 	if err != nil {
 		return err
 	}
-	this.fontLib["default"] = font
+	this.fontLib[defaultFontName] = font
 	return nil
 }
 
@@ -129,7 +131,7 @@ func (this *fontManager) getFont(fontName string) (*font, error) {
 	if !ok {
 		err := this.loadDiskFont(fontName)
 		if err != nil {
-			font, _ := this.fontLib["default"]
+			font, _ := this.fontLib[defaultFontName]
 			return font, nil
 		}
 	}

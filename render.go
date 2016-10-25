@@ -7,43 +7,52 @@ import (
 	"strings"
 )
 
+// RenderOptions are used to set color or maybe future
+// options to the AsciiRenderer
 type RenderOptions struct {
-	FontName string // font name
-
-	FontColor []color.Attribute // every ascii byte's color
+	// Name of the used font
+	FontName string
+	// Colors of the font
+	FontColor []color.Attribute
 }
 
+// Create new RenderOptions
+// Sets the default font name
 func NewRenderOptions() *RenderOptions {
-	opt := &RenderOptions{}
-	opt.FontName = "default"
-	return opt
+	return &RenderOptions{
+		FontName: defaultFontName,
+	}
 }
 
+// AsciiRender is the wrapper to render a string
 type AsciiRender struct {
+	// FontManager to store all the fonts
 	fontMgr *fontManager
 }
 
+// Create a new AsciiRender
 func NewAsciiRender() *AsciiRender {
-	this := &AsciiRender{}
-
-	this.fontMgr = newFontManager()
-	return this
+	return &AsciiRender{
+		fontMgr: newFontManager(),
+	}
 }
 
-// walk through the path, load all the *.flf font file
-func (this *AsciiRender) LoadFont(fontPath string) error {
-	return this.fontMgr.loadFont(fontPath)
+// Loading all *.flf font files recursively in a path
+func (ar *AsciiRender) LoadFont(fontPath string) error {
+	return ar.fontMgr.loadFont(fontPath)
 }
 
-// render with default options
-func (this *AsciiRender) Render(asciiStr string) (string, error) {
-	return this.render(asciiStr, NewRenderOptions())
+// Render a string with the default options
+func (ar *AsciiRender) Render(str string) (string, error) {
+	return ar.render(str, NewRenderOptions())
 }
 
-// render with options
-func (this *AsciiRender) RenderOpts(asciiStr string, opts *RenderOptions) (string, error) {
-	return this.render(asciiStr, opts)
+// Render a string with special RenderOptions
+func (ar *AsciiRender) RenderOpts(str string, opts *RenderOptions) (string, error) {
+	return ar.render(str, opts)
 }
+
+
 
 func (this *AsciiRender) convertChar(font *font, char rune) ([]string, error) {
 
