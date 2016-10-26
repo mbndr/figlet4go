@@ -7,10 +7,17 @@ A port of [figlet](http://www.figlet.org/) to golang and fork of [getwe/figlet4g
 ## Installation
 
 ```
-go get -u github.com/probandula/figlet4go
+go get -u github.com/probandula/figlet4go/...
 ```
 
 ## Usage
+
+### Command-line
+You can use the `figlet4go` command in the command-line like this:
+```bash
+figlet4go Hello
+```
+For a usage instruction read the commands usage with `figlet4go -h`
 
 ### Basic
 You have to create a renderer (`ascii`) and let it render the desired string through the `Render` method. After that you can simply print the returned string.
@@ -72,11 +79,7 @@ The default font is `standard`. These are the builtin fonts
 ### Other fonts
 Other fonts can mainly be found on [figlet](http://www.figlet.org). You have to load them as in [this example](#other-font).
 
-
-## Use the demo
-There are [demo](https://github.com/probandula/figlet4go/blob/master/demo) programs for trying out the library.  
-To run them, `cd` into the `demo/` directory and run `go run [filename]` on any program you want to run.
-
 ## Todo
+- [ ] Cli client
 - [ ] automatic the perfect char margin
 - [ ] Linebreak possible?
