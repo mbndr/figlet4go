@@ -49,7 +49,7 @@ func (ar *AsciiRender) Render(str string) (string, error) {
 // Can be called from the user (if options wished) or the above Render method
 // Contains the whole rendering logic
 func (ar *AsciiRender) RenderOpts(str string, opt *RenderOptions) (string, error) {
-
+	// Should the text be colored
 	colored := len(opt.FontColor) > 0
 
 	// Load the font

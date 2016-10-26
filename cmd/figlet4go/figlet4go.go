@@ -97,7 +97,6 @@ func getColorSlice(colorStr string) []color.Attribute {
 	}
 
 	return colors
-
 }
 
 // Validate if all required options are given

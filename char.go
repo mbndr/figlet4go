@@ -6,6 +6,7 @@ import (
 	"strings"
 )
 
+// Represents a single ascii character
 type AsciiChar struct {
 	// Slice with the lines of the Char
 	Lines []string
@@ -13,6 +14,7 @@ type AsciiChar struct {
 	Color color.Attribute
 }
 
+// Creates a new ascii character
 func NewAsciiChar(font *font, char rune) (*AsciiChar, error) {
 	// If not ascii, throw an error
 	if char < 0 || char > 127 {
@@ -24,6 +26,7 @@ func NewAsciiChar(font *font, char rune) (*AsciiChar, error) {
 
 	lines := make([]string, height)
 
+	// Get the char lines of the char
 	for i := 0; i < height; i++ {
 		row := font.fontSlice[beginRow+i]
 		row = strings.Replace(row, "@", "", -1)
