@@ -3,6 +3,9 @@
 A port of [figlet](http://www.figlet.org/) to golang and fork of [getwe/figlet4go](https://github.com/getwe/figlet4go).
 
 ![screenshot](./screenshot/figlet4go.png)
+```bash
+$ figlet4go -str "figlet4go" -font "larry3d" -colors "green;yellow;cyan"
+```
 
 ## Installation
 
