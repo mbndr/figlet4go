@@ -1,26 +1,28 @@
 # FIGlet for Go
 
-A port of [figlet](http://www.figlet.org/) to golang and fork of [getwe/figlet4go](https://github.com/getwe/figlet4go).
+`figlet4go` is a go library forked from [getwe/figlet4go](https://github.com/getwe/figlet4go) which is a port of [FIGlet](http://www.figlet.org/) to Golang.  
+With `figlet4go` it's easy to create **ascii text banners** in the command-line or with the given api.
+
+
 
 ![screenshot](./screenshot/figlet4go.png)
-```bash
-$ figlet4go -str "figlet4go" -font "larry3d" -colors "green;yellow;cyan"
-```
+
 
 ## Installation
 
 ```
-go get -u github.com/probandula/figlet4go/...
+$ go get -u github.com/probandula/figlet4go/...
 ```
 
 ## Usage
 
 ### Command-line
-You can use the `figlet4go` command in the command-line like this:
+You can use the `figlet4go` command in the command-line.  
+For example (generates the banner on top):
 ```bash
-figlet4go -str "Hello CLI"
+$ figlet4go -str "figlet4go" -font "larry3d" -colors "green;yellow;cyan"
 ```
-For a usage instruction read the commands usage with `figlet4go -h`
+For a usage instruction read the commands usage with `figlet4go -h`.
 
 ### Basic
 You have to create a renderer (`ascii`) and let it render the desired string through the `Render` method. After that you can simply print the returned string.
@@ -60,7 +62,7 @@ fmt.Print(renderStr)
 
 ### Other font
 If you want to use another font, you have to specify the name of the font as in this example.  
-Is the font you want to use not [included](#builtin) you have to load the font manually with the `LoadFont` method. This method will walk the path recursively and load all `.flf` files
+Is the font you want to use not [included](#builtin) you have to load the font manually with the `LoadFont` method. This method will walk the path recursively and load all `.flf` files.
 ```go
 import "github.com/probandula/figlet4go"
 
@@ -85,7 +87,7 @@ fmt.Print(renderStr)
 The builtin fonts are built into the `bindata.go` file with the tool [go-bindata](https://github.com/jteeuwen/go-bindata).  
 The bash script for building the default font is stored in `tools/` (`go-bindata` must be installed).
 
-The default font is `standard`. These are the builtin fonts
+The default font is `standard`. These are the builtin fonts:
 
 | Font name | Source                                                     |
 | --------- | ------                                                     |
