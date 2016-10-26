@@ -83,4 +83,4 @@ Other fonts can mainly be found on [figlet](http://www.figlet.org). You have to 
 - [x] Cli client
 - [ ] automatic the perfect char margin
 - [ ] Linebreak possible?
-- [ ] Colors in the cli client
+- [x] Colors in the cli client
