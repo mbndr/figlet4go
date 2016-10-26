@@ -22,8 +22,13 @@ For a usage instruction read the commands usage with `figlet4go -h`
 ### Basic
 You have to create a renderer (`ascii`) and let it render the desired string through the `Render` method. After that you can simply print the returned string.
 ```go
+import "github.com/probandula/figlet4go"
+
+// ...
+
 ascii := figlet4go.NewAsciiRender()
 
+// The underscore would be an error
 renderStr, _ := ascii.Render("Hello World")
 fmt.Print(renderStr)
 ```
@@ -31,6 +36,11 @@ fmt.Print(renderStr)
 ### Colored
 The colors given in the `[]color.Attribute` slice are repeating if the string is longer than the slice. You have to call the `RenderOpts` instead of the `Render` method to give the Renderer the Options.
 ```go
+import "github.com/probandula/figlet4go"
+import "github.com/fatih/color"
+
+// ...
+
 ascii := figlet4go.NewAsciiRender()
 
 // Adding the colors to RenderOptions
@@ -42,7 +52,6 @@ options.FontColor = []color.Attribute{
 }
 
 renderStr, _ := ascii.RenderOpts("Hello Colors", options)
-
 fmt.Print(renderStr)
 ```
 
@@ -50,6 +59,11 @@ fmt.Print(renderStr)
 If you want to use another font, you have to specify the name of the font as in this example.  
 Is the font you want to use not [included](#builtin) you have to load the font manually with the `LoadFont` method. This method will walk the path recursively and load all `.flf` files
 ```go
+import "github.com/probandula/figlet4go"
+
+// ...
+
+
 ascii := figlet4go.NewAsciiRender()
 
 options := figlet4go.NewRenderOptions()
@@ -59,7 +73,6 @@ options.FontName = "larry3d"
 ascii.LoadFont("/path/to/fonts/")
 
 renderStr, _ := ascii.RenderOpts("Hello Colors", options)
-
 fmt.Print(renderStr)
 ```
 
