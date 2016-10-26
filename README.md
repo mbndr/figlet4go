@@ -80,6 +80,7 @@ The default font is `standard`. These are the builtin fonts
 Other fonts can mainly be found on [figlet](http://www.figlet.org). You have to load them as in [this example](#other-font).
 
 ## Todo
-- [ ] Cli client
+- [x] Cli client
 - [ ] automatic the perfect char margin
 - [ ] Linebreak possible?
+- [ ] Colors in the cli client
