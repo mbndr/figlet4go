@@ -57,16 +57,26 @@ func (this *fontManager) loadFont(fontPath string) error {
 
 // Load the default font
 func (this *fontManager) loadBuildInFont() error {
-	fontStr, err := Asset("standard.flf")
-	if err != nil {
-		panic(err)
+
+	// Default fonts to load
+	defaultFonts := []string{
+		"standard",
+		"larry3d",
 	}
 
-	font, err := this.parseFontContent(string(fontStr))
-	if err != nil {
-		return err
+	// Load each default font
+	for _, name := range defaultFonts {
+		fontStr, err := Asset(name + ".flf")
+		if err != nil {
+			return err
+		}
+		font, err := this.parseFontContent(string(fontStr))
+		if err != nil {
+			return err
+		}
+		this.fontLib[name] = font
 	}
-	this.fontLib[defaultFontName] = font
+
 	return nil
 }
 
@@ -126,6 +136,7 @@ func (this *fontManager) parseFontContent(cont string) (*font, error) {
 }
 
 // Get a font by name
+// Better error handling. Why is there one in the return if not used?
 func (this *fontManager) getFont(fontName string) (*font, error) {
 	font, ok := this.fontLib[fontName]
 	if !ok {

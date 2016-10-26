@@ -15,7 +15,10 @@ func main() {
 	ascii := figlet4go.NewAsciiRender()
 
 	// Render the string
-	renderStr, _ := ascii.Render(str)
+	renderStr, err := ascii.Render(str)
+	if err != nil {
+		panic(err)
+	}
 
 	// Print the string
 	fmt.Print(renderStr)
