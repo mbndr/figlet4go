@@ -15,7 +15,7 @@ go get -u github.com/probandula/figlet4go/...
 ### Command-line
 You can use the `figlet4go` command in the command-line like this:
 ```bash
-figlet4go Hello
+figlet4go -str "Hello CLI"
 ```
 For a usage instruction read the commands usage with `figlet4go -h`
 

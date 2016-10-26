@@ -75,7 +75,7 @@ func (ar *AsciiRender) RenderOpts(str string, opt *RenderOptions) (string, error
 		// Set color if given
 		if colored {
 			// Start colors from beginning if length is reached
-			if curColorIndex == len(opt.FontColor)  {
+			if curColorIndex == len(opt.FontColor) {
 				curColorIndex = 0
 			}
 			// Assign color and increment the index
@@ -99,6 +99,6 @@ func (ar *AsciiRender) RenderOpts(str string, opt *RenderOptions) (string, error
 		// A new line at the end
 		result += "\n"
 	}
-	
+
 	return result, nil
 }

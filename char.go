@@ -2,8 +2,8 @@ package figlet4go
 
 import (
 	"errors"
-	"strings"
 	"github.com/fatih/color"
+	"strings"
 )
 
 type AsciiChar struct {
@@ -25,7 +25,7 @@ func NewAsciiChar(font *font, char rune) (*AsciiChar, error) {
 	lines := make([]string, height)
 
 	for i := 0; i < height; i++ {
-		row := font.fontSlice[beginRow + i]
+		row := font.fontSlice[beginRow+i]
 		row = strings.Replace(row, "@", "", -1)
 		row = strings.Replace(row, font.hardblank, " ", -1)
 		lines[i] = row
