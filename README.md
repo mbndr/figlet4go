@@ -58,17 +58,19 @@ fmt.Print(renderStr)
 
 ## Fonts
 
-### Bulitin
+### Builtin
 The builtin fonts are built into the `bindata.go` file with the tool [go-bindata](https://github.com/jteeuwen/go-bindata).  
-The bash script for building the default font is stored in `tools/` (`go-bindata` must be installed).  
-The default font is `standard`. All builtin fonts are listed here:
-| Font name | Source |
-| --- | --- |
-| standard | http://www.figlet.org/fontdb_example.cgi?font=standard.flf |
-| larry3d | http://www.figlet.org/fontdb_example.cgi?font=larry3d.flf |
+The bash script for building the default font is stored in `tools/` (`go-bindata` must be installed).
+
+The default font is `standard`. These are the builtin fonts
+
+| Font name | Source                                                     |
+| --------- | ------                                                     |
+| standard  | http://www.figlet.org/fontdb_example.cgi?font=standard.flf |
+| larry3d   | http://www.figlet.org/fontdb_example.cgi?font=larry3d.flf  |
 
 ### Other fonts
-Other fonts can mainly be found on [figlet](http://www.figlet.org). You have to load them as in [this example](#other-fonts).
+Other fonts can mainly be found on [figlet](http://www.figlet.org). You have to load them as in [this example](#other-font).
 
 
 ## Use the demo
