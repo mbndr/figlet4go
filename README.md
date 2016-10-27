@@ -102,3 +102,4 @@ Other fonts can mainly be found on [figlet](http://www.figlet.org). You have to 
 - [ ] automatic the perfect char margin
 - [ ] Linebreak possible?
 - [x] Colors in the cli client
+- [ ] No dependencies (fatih/color)

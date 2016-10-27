@@ -62,37 +62,23 @@ func getColorSlice(colorStr string) []color.Attribute {
 	colors := make([]color.Attribute, len(givenColors))
 
 	for i, c := range givenColors {
-		if c == "black" {
+		switch c {
+		case "black":
 			colors[i] = color.FgBlack
-			continue
-		}
-		if c == "red" {
+		case "red":
 			colors[i] = color.FgRed
-			continue
-		}
-		if c == "green" {
+		case "green":
 			colors[i] = color.FgGreen
-			continue
-		}
-		if c == "yellow" {
+		case "yellow":
 			colors[i] = color.FgYellow
-			continue
-		}
-		if c == "blue" {
+		case "blue":
 			colors[i] = color.FgBlue
-			continue
-		}
-		if c == "magenta" {
+		case "magenta":
 			colors[i] = color.FgMagenta
-			continue
-		}
-		if c == "cyan" {
+		case "cyan":
 			colors[i] = color.FgCyan
-			continue
-		}
-		if c == "white" {
+		case "white":
 			colors[i] = color.FgWhite
-			continue
 		}
 	}
 
