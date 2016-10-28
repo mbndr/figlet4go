@@ -54,9 +54,9 @@ func (ar *AsciiRender) RenderOpts(str string, opt *RenderOptions) (string, error
 
 	// Load the font
 	font := ar.fontMgr.getFont(opt.FontName)
-	
+
 	// Slice holding the chars
-	chars := []*AsciiChar{}
+	chars := []*asciiChar{}
 
 	// Index of the current color
 	curColorIndex := 0

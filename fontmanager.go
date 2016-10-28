@@ -29,7 +29,7 @@ type fontManager struct {
 	fontList map[string]string
 }
 
-// Create a new fontmanagerM
+// Create a new fontmanager
 func newFontManager() *fontManager {
 	fm := &fontManager{}
 	fm.fontLib = make(map[string]*font)
@@ -52,10 +52,9 @@ func (fm *fontManager) getFont(fontName string) *font {
 			fontName = defaultFont
 		}
 	}
-	
+
 	return fm.fontLib[fontName]
 }
-
 
 // Loads all .flf files recursively in the fontPath path
 // Saves the found font files in a map with the name as the key
@@ -69,11 +68,11 @@ func (fm *fontManager) loadFontList(fontPath string) error {
 			return err
 		}
 		// If the current item is a directory or has not the correct suffix
-		if info.IsDir() || !strings.HasSuffix(info.Name(), "." + extension) {
+		if info.IsDir() || !strings.HasSuffix(info.Name(), "."+extension) {
 			return nil
 		}
 		// Extract the font name
-		fontName := strings.TrimSuffix(info.Name(), "." + extension)
+		fontName := strings.TrimSuffix(info.Name(), "."+extension)
 		// Save the font to the list
 		fm.fontList[fontName] = path
 
@@ -132,8 +131,6 @@ func (fm *fontManager) loadBuildInFont() error {
 	return nil
 }
 
-
-
 // Parse a font from a content string
 // Used to load fonts from disk and the builtin fonts
 func parseFontContent(cont string) (*font, error) {
@@ -156,10 +153,9 @@ func parseFontContent(cont string) (*font, error) {
 	// Initialize the font
 	font := &font{
 		hardblank: header[0][len(header[0])-1:],
-		height: height,
+		height:    height,
 		fontSlice: lines[commentEndLine+1:],
 	}
 
 	return font, nil
 }
-
