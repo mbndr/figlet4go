@@ -85,9 +85,9 @@ func (fm *fontManager) loadFontList(fontPath string) error {
 
 // Load a font from disk
 // The font must be registered in the fontList
-func (this *fontManager) loadDiskFont(fontName string) error {
+func (fm *fontManager) loadDiskFont(fontName string) error {
 	// Get the fontpath
-	path, ok := this.fontList[fontName]
+	path, ok := fm.fontList[fontName]
 	// Font is not registered
 	if !ok {
 		return errors.New("Font Not Found: " + fontName)
@@ -106,7 +106,7 @@ func (this *fontManager) loadDiskFont(fontName string) error {
 	}
 
 	// Register the font object in the fontLib
-	this.fontLib[fontName] = font
+	fm.fontLib[fontName] = font
 
 	return nil
 }

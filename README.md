@@ -3,10 +3,9 @@
 `figlet4go` is a go library forked from [getwe/figlet4go](https://github.com/getwe/figlet4go) which is a port of [FIGlet](http://www.figlet.org/) to Golang.  
 With `figlet4go` it's easy to create **ascii text banners** in the command-line or with the given api.
 
-
-
 ![screenshot](./screenshot/figlet4go.png)
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/probandula/figlet4go)](https://goreportcard.com/report/github.com/probandula/figlet4go)
 
 ## Installation
 

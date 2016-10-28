@@ -14,7 +14,7 @@ var (
 	str      *string = flag.String("str", "", "String to be converted with FIGlet")
 	font     *string = flag.String("font", "", "Font name to use")
 	fontpath *string = flag.String("fontpath", "", "Font path to load fonts from")
-	colors   *string = flag.String("colors", "", "Character colors seperated by ';'\n\tPossible colors: black, red, green, yellow, blue, magenta, cyan, white")
+	colors   *string = flag.String("colors", "", "Character colors separated by ';'\n\tPossible colors: black, red, green, yellow, blue, magenta, cyan, white")
 )
 
 func main() {
@@ -54,7 +54,7 @@ func main() {
 }
 
 // Get a slice with colors to give to the RenderOptions
-// Splits the given string with the seperator ";"
+// Splits the given string with the separator ";"
 func getColorSlice(colorStr string) []color.Attribute {
 
 	givenColors := strings.Split(colorStr, ";")

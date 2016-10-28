@@ -1,3 +1,4 @@
+package figlet4go
 // Explanation of the .flf file header
 // THE HEADER LINE
 //
@@ -16,7 +17,6 @@
 //   * The two layout parameters are closely related and fairly complex.
 //       (See "INTERPRETATION OF LAYOUT PARAMETERS".)
 //
-package figlet4go
 
 import (
 	"strings"
