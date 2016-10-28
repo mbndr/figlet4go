@@ -50,7 +50,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fmt.Println(renderStr)
+	fmt.Print(renderStr)
 }
 
 // Get a slice with colors to give to the RenderOptions
