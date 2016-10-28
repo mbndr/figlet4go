@@ -28,7 +28,7 @@ type font struct {
 	hardblank string
 	// Height of one char
 	height int
-	//
+	// A string for each line of the char
 	fontSlice []string
 }
 

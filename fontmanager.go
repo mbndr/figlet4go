@@ -30,10 +30,13 @@ type fontManager struct {
 }
 
 // Create a new fontmanager
+// Initializes the fontManager,
+// loads the builtin fonts and returns it
 func newFontManager() *fontManager {
-	fm := &fontManager{}
-	fm.fontLib = make(map[string]*font)
-	fm.fontList = make(map[string]string)
+	fm := &fontManager{
+		fontLib:  make(map[string]*font),
+		fontList: make(map[string]string),
+	}
 	fm.loadBuildInFont()
 	return fm
 }
