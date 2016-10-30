@@ -1,12 +1,12 @@
 package main
 
 import (
-	"errors"
 	"flag"
 	"fmt"
 	"github.com/fatih/color"
 	"github.com/probandula/figlet4go"
 	"log"
+	"os"
 	"strings"
 )
 
@@ -22,10 +22,7 @@ func main() {
 	flag.Parse()
 
 	// Validate and log the error
-	err := validate()
-	if err != nil {
-		log.Fatal(err)
-	}
+	validate()
 
 	// Create objects
 	ascii := figlet4go.NewAsciiRender()
@@ -87,9 +84,9 @@ func getColorSlice(colorStr string) []color.Attribute {
 
 // Validate if all required options are given
 // flag.Parse() must be called before this
-func validate() error {
+func validate() {
 	if *str == "" {
-		return errors.New("No string given")
+		flag.Usage()
+		os.Exit(1)
 	}
-	return nil
 }

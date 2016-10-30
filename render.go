@@ -13,7 +13,7 @@ type RenderOptions struct {
 	FontColor []color.Attribute
 }
 
-// Create new RenderOptions
+// NewRenderOptions creates new RenderOptions
 // Sets the default font name
 func NewRenderOptions() *RenderOptions {
 	return &RenderOptions{
@@ -27,25 +27,25 @@ type AsciiRender struct {
 	fontMgr *fontManager
 }
 
-// Create a new AsciiRender
+// NewAsciiRender creates a new AsciiRender
 func NewAsciiRender() *AsciiRender {
 	return &AsciiRender{
 		fontMgr: newFontManager(),
 	}
 }
 
-// Loading all *.flf font files recursively in a path
+// LoadFont loads all *.flf font files recursively in a path
 func (ar *AsciiRender) LoadFont(fontPath string) error {
 	return ar.fontMgr.loadFontList(fontPath)
 }
 
-// Render a string with the default options
+// Render renders a string with the default options
 // Calls the RenderOpts method with a new RenderOptions object
 func (ar *AsciiRender) Render(str string) (string, error) {
 	return ar.RenderOpts(str, NewRenderOptions())
 }
 
-// Render a string with special RenderOptions
+// RenderOpts renders a string with special RenderOptions
 // Can be called from the user (if options wished) or the above Render method
 // Contains the whole rendering logic
 func (ar *AsciiRender) RenderOpts(str string, opt *RenderOptions) (string, error) {
@@ -64,7 +64,7 @@ func (ar *AsciiRender) RenderOpts(str string, opt *RenderOptions) (string, error
 	// Foreach char create the ascii char
 	for _, char := range str {
 		// AsciiChar
-		asciiChar, err := NewAsciiChar(font, char)
+		asciiChar, err := newAsciiChar(font, char)
 		if err != nil {
 			return "", err
 		}

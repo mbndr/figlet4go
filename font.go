@@ -1,4 +1,5 @@
 package figlet4go
+
 // Explanation of the .flf file header
 // THE HEADER LINE
 //

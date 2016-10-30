@@ -14,7 +14,7 @@ type asciiChar struct {
 }
 
 // Creates a new ascii character
-func NewAsciiChar(font *font, char rune) (*asciiChar, error) {
+func newAsciiChar(font *font, char rune) (*asciiChar, error) {
 	// If not ascii, throw an error
 	if char < 0 || char > 127 {
 		return nil, errors.New("Not Ascii")

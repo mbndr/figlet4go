@@ -66,7 +66,7 @@ func (fm *fontManager) getFont(fontName string) *font {
 func (fm *fontManager) loadFontList(fontPath string) error {
 	// Walk through the path
 	return filepath.Walk(fontPath, func(path string, info os.FileInfo, err error) error {
-		// Return an error if occured
+		// Return an error if occurred
 		if err != nil {
 			return err
 		}
