@@ -1,16 +1,12 @@
 package figlet4go
 
-import (
-	"github.com/fatih/color"
-)
-
 // RenderOptions are used to set color or maybe future
 // options to the AsciiRenderer
 type RenderOptions struct {
 	// Name of the used font
 	FontName string
 	// Colors of the font
-	FontColor []color.Attribute
+	FontColor []Color
 }
 
 // NewRenderOptions creates new RenderOptions

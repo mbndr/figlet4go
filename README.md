@@ -1,11 +1,14 @@
 # FIGlet for Go
 
-`figlet4go` is a go library forked from [getwe/figlet4go](https://github.com/getwe/figlet4go) which is a port of [FIGlet](http://www.figlet.org/) to Golang.  
+[![Go Report Card](https://goreportcard.com/badge/github.com/probandula/figlet4go)](https://goreportcard.com/report/github.com/probandula/figlet4go)
+
+`figlet4go` is a go library forked from  which is a port of [FIGlet](http://www.figlet.org/) to Golang.  
 With `figlet4go` it's easy to create **ascii text banners** in the command-line or with the given api.
 
 ![screenshot](./screenshot/figlet4go.png)
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/probandula/figlet4go)](https://goreportcard.com/report/github.com/probandula/figlet4go)
+
+**This Repository used to be a fork of [getwe/figlet4go](https://github.com/getwe/figlet4go), but changed so much that it's not compatible anymore**
 
 ## Installation
 
@@ -38,10 +41,10 @@ fmt.Print(renderStr)
 ```
 
 ### Colored
-The colors given in the `[]color.Attribute` slice are repeating if the string is longer than the slice. You have to call the `RenderOpts` instead of the `Render` method to give the Renderer the Options.
+The colors given in the `[]figlet4go.Color` slice are repeating if the string is longer than the slice. You have to call the `RenderOpts` instead of the `Render` method to give the Renderer the Options.  
+If you use a `TrueColor` color, you have to ensure that your [terminal supports](https://gist.github.com/XVilka/8346728/) it.
 ```go
 import "github.com/probandula/figlet4go"
-import "github.com/fatih/color"
 
 // ...
 
@@ -49,10 +52,15 @@ ascii := figlet4go.NewAsciiRender()
 
 // Adding the colors to RenderOptions
 options := figlet4go.NewRenderOptions()
-options.FontColor = []color.Attribute{
-	color.FgGreen,
-	color.FgYellow,
-	color.FgCyan,
+options.FontColor = []figlet4go.Color{
+	// Colors can be given by default ansi color codes...
+	figlet4go.ColorGreen,
+	figlet4go.ColorYellow,
+	figlet4go.ColorCyan,
+	// ...or by an hex string...
+	figlet4go.GetTrueColorFromHexString("885DBA"),
+	// ...or by an TrueColor object with rgb values
+	figlet4go.TrueColor{136, 93, 186},
 }
 
 renderStr, _ := ascii.RenderOpts("Hello Colors", options)
@@ -67,7 +75,6 @@ import "github.com/probandula/figlet4go"
 
 // ...
 
-
 ascii := figlet4go.NewAsciiRender()
 
 options := figlet4go.NewRenderOptions()
@@ -76,7 +83,7 @@ options.FontName = "larry3d"
 // If 'larry3d' wouldn't be included you would have to load your .flf files like that:
 ascii.LoadFont("/path/to/fonts/")
 
-renderStr, _ := ascii.RenderOpts("Hello Colors", options)
+renderStr, _ := ascii.RenderOpts("Hello Fonts", options)
 fmt.Print(renderStr)
 ```
 
@@ -98,7 +105,10 @@ Other fonts can mainly be found on [figlet](http://www.figlet.org). You have to 
 
 ## Todo
 - [x] Cli client
-- [ ] automatic the perfect char margin
+- [ ] automatically the perfect char margin
 - [ ] Linebreak possible?
 - [x] Colors in the cli client
-- [ ] No dependencies (fatih/color)
+- [x] No dependencies (fatih/color)
+- [x] Truecolor support
+- [ ] More parsers (HTML)
+- [ ] Tests

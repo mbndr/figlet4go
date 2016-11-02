@@ -3,7 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/fatih/color"
 	"github.com/probandula/figlet4go"
 	"log"
 	"os"
@@ -14,7 +13,7 @@ var (
 	str      *string = flag.String("str", "", "String to be converted with FIGlet")
 	font     *string = flag.String("font", "", "Font name to use")
 	fontpath *string = flag.String("fontpath", "", "Font path to load fonts from")
-	colors   *string = flag.String("colors", "", "Character colors separated by ';'\n\tPossible colors: black, red, green, yellow, blue, magenta, cyan, white")
+	colors   *string = flag.String("colors", "", "Character colors separated by ';'\n\tPossible colors: black, red, green, yellow, blue, magenta, cyan, white, or any hexcode (f.e. '885DBA')")
 )
 
 func main() {
@@ -52,30 +51,37 @@ func main() {
 
 // Get a slice with colors to give to the RenderOptions
 // Splits the given string with the separator ";"
-func getColorSlice(colorStr string) []color.Attribute {
+func getColorSlice(colorStr string) []figlet4go.Color {
 
 	givenColors := strings.Split(colorStr, ";")
 
-	colors := make([]color.Attribute, len(givenColors))
+	colors := make([]figlet4go.Color, len(givenColors))
 
 	for i, c := range givenColors {
 		switch c {
 		case "black":
-			colors[i] = color.FgBlack
+			colors[i] = figlet4go.ColorBlack
 		case "red":
-			colors[i] = color.FgRed
+			colors[i] = figlet4go.ColorRed
 		case "green":
-			colors[i] = color.FgGreen
+			colors[i] = figlet4go.ColorGreen
 		case "yellow":
-			colors[i] = color.FgYellow
+			colors[i] = figlet4go.ColorYellow
 		case "blue":
-			colors[i] = color.FgBlue
+			colors[i] = figlet4go.ColorBlue
 		case "magenta":
-			colors[i] = color.FgMagenta
+			colors[i] = figlet4go.ColorMagenta
 		case "cyan":
-			colors[i] = color.FgCyan
+			colors[i] = figlet4go.ColorCyan
 		case "white":
-			colors[i] = color.FgWhite
+			colors[i] = figlet4go.ColorWhite
+		default:
+			// Try to parse the TrueColor from the string
+			color, err := figlet4go.GetTrueColorFromHexString(c)
+			if err != nil {
+				log.Fatal(err)
+			}
+			colors[i] = color
 		}
 	}
 
