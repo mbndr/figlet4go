@@ -98,7 +98,8 @@ import "github.com/probandula/figlet4go"
 ascii := figlet4go.NewAsciiRender()
 
 options := figlet4go.NewRenderOptions()
-options.Parser = figlet4go.GetParser("html")
+p, _ := figlet4go.GetParser("html")
+options.Parser = *p
 
 renderStr, _ := ascii.RenderOpts("Hello Fonts", options)
 fmt.Print(renderStr)
@@ -138,4 +139,5 @@ Other fonts can mainly be found on [figlet](http://www.figlet.org). You have to 
 - [x] More parsers (HTML)
 - [x] Better parsers (maybe stored in a map)
 - [ ] Pointer-Value standarization
+- [ ] Writer choosing for writing to file
 - [ ] Tests
