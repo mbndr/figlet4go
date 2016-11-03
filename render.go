@@ -7,6 +7,8 @@ type RenderOptions struct {
 	FontName string
 	// Colors of the font
 	FontColor []Color
+	// Parser
+	Parser Parser
 }
 
 // NewRenderOptions creates new RenderOptions
@@ -14,6 +16,7 @@ type RenderOptions struct {
 func NewRenderOptions() *RenderOptions {
 	return &RenderOptions{
 		FontName: defaultFont,
+		Parser:   ParserTerminal,
 	}
 }
 
@@ -83,15 +86,19 @@ func (ar *AsciiRender) RenderOpts(str string, opt *RenderOptions) (string, error
 	// Result which will be returned
 	result := ""
 
+	result += opt.Parser.Prefix
+
 	// Foreach line of the font height
 	for curLine := 0; curLine < font.height; curLine++ {
 		// Add the current line of the char to the result
 		for i := range chars {
-			result += chars[i].GetLine(curLine)
+			result += chars[i].GetLine(curLine, opt.Parser)
 		}
 		// A new line at the end
-		result += "\n"
+		result += opt.Parser.NewLine
 	}
+
+	result += opt.Parser.Suffix
 
 	return result, nil
 }

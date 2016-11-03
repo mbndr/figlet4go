@@ -22,7 +22,7 @@ $ go get -u github.com/probandula/figlet4go/...
 You can use the `figlet4go` command in the command-line.  
 For example (generates the banner on top):
 ```bash
-$ figlet4go -str "figlet4go" -font "larry3d" -colors "green;yellow;cyan"
+$ figlet4go -str "figlet4go" -font "larry3d" -colors "green;FF9900;cyan"
 ```
 For a usage instruction read the commands usage with `figlet4go -h`.
 
@@ -42,7 +42,8 @@ fmt.Print(renderStr)
 
 ### Colored
 The colors given in the `[]figlet4go.Color` slice are repeating if the string is longer than the slice. You have to call the `RenderOpts` instead of the `Render` method to give the Renderer the Options.  
-If you use a `TrueColor` color, you have to ensure that your [terminal supports](https://gist.github.com/XVilka/8346728/) it.
+If you use a `TrueColor` color, you have to ensure that your [terminal supports](https://gist.github.com/XVilka/8346728/) it.  
+If you use a `AnsiColor` with an `TrueColor` only parser (f.e. `ParserHTML`), `TrueColor` objects are automatically generated.
 ```go
 import "github.com/probandula/figlet4go"
 
@@ -58,7 +59,7 @@ options.FontColor = []figlet4go.Color{
 	figlet4go.ColorYellow,
 	figlet4go.ColorCyan,
 	// ...or by an hex string...
-	figlet4go.GetTrueColorFromHexString("885DBA"),
+	figlet4go.NewTrueColorFromHexString("885DBA"),
 	// ...or by an TrueColor object with rgb values
 	figlet4go.TrueColor{136, 93, 186},
 }
@@ -86,6 +87,14 @@ ascii.LoadFont("/path/to/fonts/")
 renderStr, _ := ascii.RenderOpts("Hello Fonts", options)
 fmt.Print(renderStr)
 ```
+
+## Parsers
+There a currently these Parsers available:
+
+| Parser | What does it do?                                                     |
+| --------- | ------                                                     |
+| ParserTerminal  | Parses the result directly |
+| ParserHTML   | Parses a pasteable `<code>` html block  |
 
 ## Fonts
 

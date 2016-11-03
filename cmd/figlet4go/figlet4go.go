@@ -14,6 +14,7 @@ var (
 	font     *string = flag.String("font", "", "Font name to use")
 	fontpath *string = flag.String("fontpath", "", "Font path to load fonts from")
 	colors   *string = flag.String("colors", "", "Character colors separated by ';'\n\tPossible colors: black, red, green, yellow, blue, magenta, cyan, white, or any hexcode (f.e. '885DBA')")
+	parser   *string = flag.String("parser", "terminal", "Parser to use\tPossible parsers: terminal (default), html")
 )
 
 func main() {
@@ -35,6 +36,9 @@ func main() {
 	// Set the font
 	options.FontName = *font
 
+	// Set the parser
+	options.Parser = getParser(*parser)
+
 	// Set colors
 	if *colors != "" {
 		options.FontColor = getColorSlice(*colors)
@@ -47,6 +51,17 @@ func main() {
 	}
 
 	fmt.Print(renderStr)
+}
+
+// Get the parser for given flag argument
+func getParser(parserStr string) figlet4go.Parser {
+	switch parserStr {
+	case "html":
+		return figlet4go.ParserHTML
+	// Terminal parser is default
+	default:
+		return figlet4go.ParserTerminal
+	}
 }
 
 // Get a slice with colors to give to the RenderOptions
@@ -77,7 +92,7 @@ func getColorSlice(colorStr string) []figlet4go.Color {
 			colors[i] = figlet4go.ColorWhite
 		default:
 			// Try to parse the TrueColor from the string
-			color, err := figlet4go.GetTrueColorFromHexString(c)
+			color, err := figlet4go.NewTrueColorFromHexString(c)
 			if err != nil {
 				log.Fatal(err)
 			}

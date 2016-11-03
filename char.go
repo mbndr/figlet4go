@@ -2,6 +2,7 @@ package figlet4go
 
 import (
 	"errors"
+	"strings"
 )
 
 // Represents a single ascii character
@@ -26,14 +27,28 @@ func newAsciiChar(font *font, char rune) (*asciiChar, error) {
 }
 
 // Return a line of the char as string with color if set
-func (char *asciiChar) GetLine(index int) string {
+func (char *asciiChar) GetLine(index int, p Parser) string {
 	prefix := ""
 	suffix := ""
 
+	line := handleReplaces(char.Lines[index], p)
+
 	if char.Color != nil {
-		prefix = char.Color.getPrefix()
-		suffix = char.Color.getSuffix()
+		prefix = char.Color.getPrefix(p)
+		suffix = char.Color.getSuffix(p)
 	}
 
-	return prefix + char.Lines[index] + suffix
+	return prefix + line + suffix
+}
+
+// Replace all parser specific things
+func handleReplaces(str string, p Parser) string {
+	if p.Replaces == nil {
+		return str
+	}
+	// Replace for each entry
+	for old, new := range p.Replaces {
+		str = strings.Replace(str, old, new, -1)
+	}
+	return str
 }
