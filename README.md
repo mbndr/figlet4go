@@ -88,6 +88,22 @@ renderStr, _ := ascii.RenderOpts("Hello Fonts", options)
 fmt.Print(renderStr)
 ```
 
+### Other parser
+A Parser can be set through the `GetParser` function with a valid key
+```go
+import "github.com/probandula/figlet4go"
+
+// ...
+
+ascii := figlet4go.NewAsciiRender()
+
+options := figlet4go.NewRenderOptions()
+options.Parser = figlet4go.GetParser("html")
+
+renderStr, _ := ascii.RenderOpts("Hello Fonts", options)
+fmt.Print(renderStr)
+```
+
 ## Parsers
 There a currently these Parsers available:
 
@@ -119,5 +135,7 @@ Other fonts can mainly be found on [figlet](http://www.figlet.org). You have to 
 - [x] Colors in the cli client
 - [x] No dependencies (fatih/color)
 - [x] Truecolor support
-- [ ] More parsers (HTML)
+- [x] More parsers (HTML)
+- [x] Better parsers (maybe stored in a map)
+- [ ] Pointer-Value standarization
 - [ ] Tests

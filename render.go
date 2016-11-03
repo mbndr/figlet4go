@@ -14,9 +14,10 @@ type RenderOptions struct {
 // NewRenderOptions creates new RenderOptions
 // Sets the default font name
 func NewRenderOptions() *RenderOptions {
+	p, _ := GetParser("terminal")
 	return &RenderOptions{
 		FontName: defaultFont,
-		Parser:   ParserTerminal,
+		Parser:   *p,
 	}
 }
 

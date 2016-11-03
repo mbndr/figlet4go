@@ -37,7 +37,11 @@ func main() {
 	options.FontName = *font
 
 	// Set the parser
-	options.Parser = getParser(*parser)
+	p, err := figlet4go.GetParser(*parser)
+	if err != nil {
+		p, _ = figlet4go.GetParser("terminal")
+	}
+	options.Parser = *p
 
 	// Set colors
 	if *colors != "" {
@@ -51,17 +55,6 @@ func main() {
 	}
 
 	fmt.Print(renderStr)
-}
-
-// Get the parser for given flag argument
-func getParser(parserStr string) figlet4go.Parser {
-	switch parserStr {
-	case "html":
-		return figlet4go.ParserHTML
-	// Terminal parser is default
-	default:
-		return figlet4go.ParserTerminal
-	}
 }
 
 // Get a slice with colors to give to the RenderOptions

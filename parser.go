@@ -1,5 +1,7 @@
 package figlet4go
 
+import "errors"
+
 // Parser stores some output specific stuff
 type Parser struct {
 	// Name used for switching in colors.go
@@ -14,9 +16,19 @@ type Parser struct {
 	Replaces map[string]string
 }
 
-var (
+var parsers map[string]Parser = map[string]Parser {
+
 	// Default terminal parser
-	ParserTerminal Parser = Parser{"terminal", "", "", "\n", nil}
+	"terminal": Parser{"terminal", "", "", "\n", nil},
 	// Parser for HTML code
-	ParserHTML Parser = Parser{"html", "<code>", "</code>", "<br>", map[string]string{" ": "&nbsp;"}}
-)
+	"html": Parser{"html", "<code>", "</code>", "<br>", map[string]string{" ": "&nbsp;"}},
+}
+
+// GetParser returns a parser by its key
+func GetParser(key string) (*Parser, error) {
+	parser, ok := parsers[key]
+	if !ok {
+		return nil, errors.New("Invalid parser key: " + key)
+	}
+	return &parser, nil
+}
