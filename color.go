@@ -24,15 +24,15 @@ var (
 // TrueColor lookalikes for displaying AnsiColor f.e. with the HTML parser
 // Colors based on http://clrs.cc/
 // "TrueColorForAnsiColor"
-var tcfac map[*AnsiColor]TrueColor = map[*AnsiColor]TrueColor{
-	&ColorBlack:   {0, 0, 0},
-	&ColorRed:     {255, 65, 54},
-	&ColorGreen:   {149, 189, 64},
-	&ColorYellow:  {255, 220, 0},
-	&ColorBlue:    {0, 116, 217},
-	&ColorMagenta: {177, 13, 201},
-	&ColorCyan:    {105, 206, 245},
-	&ColorWhite:   {255, 255, 255},
+var tcfac map[AnsiColor]TrueColor = map[AnsiColor]TrueColor{
+	ColorBlack:   {0, 0, 0},
+	ColorRed:     {255, 65, 54},
+	ColorGreen:   {149, 189, 64},
+	ColorYellow:  {255, 220, 0},
+	ColorBlue:    {0, 116, 217},
+	ColorMagenta: {177, 13, 201},
+	ColorCyan:    {105, 206, 245},
+	ColorWhite:   {255, 255, 255},
 }
 
 // Color has a pre- and a suffix
@@ -104,7 +104,7 @@ func (ac AnsiColor) getPrefix(p Parser) string {
 
 	case "html":
 		// Get the TrueColor for the AnsiColor
-		tc := tcfac[&ac]
+		tc := tcfac[ac]
 		return tc.getPrefix(p)
 	}
 
@@ -121,7 +121,7 @@ func (ac AnsiColor) getSuffix(p Parser) string {
 
 	case "html":
 		// Get the TrueColor for the AnsiColor
-		tc := tcfac[&ac]
+		tc := tcfac[ac]
 		return tc.getSuffix(p)
 	}
 
