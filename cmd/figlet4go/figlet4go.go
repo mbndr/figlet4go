@@ -15,7 +15,7 @@ var (
 	fontpath *string = flag.String("fontpath", "", "Font path to load fonts from")
 	colors   *string = flag.String("colors", "", "Character colors separated by ';'\n\tPossible colors: black, red, green, yellow, blue, magenta, cyan, white, or any hexcode (f.e. '885DBA')")
 	parser   *string = flag.String("parser", "terminal", "Parser to use\tPossible parsers: terminal (default), html")
-	file   *string = flag.String("file", "", "File to write to")
+	file     *string = flag.String("file", "", "File to write to")
 )
 
 func main() {
