@@ -5,23 +5,23 @@ import "errors"
 // Parser stores some output specific stuff
 type Parser struct {
 	// Name used for switching in colors.go
-	Name     string
+	Name string
 	// Parser prefix
-	Prefix   string
+	Prefix string
 	// Parser suffix
-	Suffix   string
+	Suffix string
 	// Newline representation
-	NewLine  string
+	NewLine string
 	// Things to be replaced (f.e. \n to <br>)
 	Replaces map[string]string
 }
 
-var parsers map[string]Parser = map[string]Parser {
+var parsers map[string]Parser = map[string]Parser{
 
 	// Default terminal parser
-	"terminal": Parser{"terminal", "", "", "\n", nil},
+	"terminal": {"terminal", "", "", "\n", nil},
 	// Parser for HTML code
-	"html": Parser{"html", "<code>", "</code>", "<br>", map[string]string{" ": "&nbsp;"}},
+	"html": {"html", "<code>", "</code>", "<br>", map[string]string{" ": "&nbsp;"}},
 }
 
 // GetParser returns a parser by its key

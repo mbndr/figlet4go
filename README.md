@@ -139,5 +139,5 @@ Other fonts can mainly be found on [figlet](http://www.figlet.org). You have to 
 - [x] More parsers (HTML)
 - [x] Better parsers (maybe stored in a map)
 - [ ] Pointer-Value standarization
-- [ ] Writer choosing for writing to file
+- [x] Writer choosing for writing to file
 - [ ] Tests

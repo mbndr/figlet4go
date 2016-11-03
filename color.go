@@ -25,17 +25,17 @@ var (
 // Colors based on http://clrs.cc/
 // "TrueColorForAnsiColor"
 var tcfac map[AnsiColor]TrueColor = map[AnsiColor]TrueColor{
-	ColorBlack:   TrueColor{0, 0, 0},
-	ColorRed:     TrueColor{255, 65, 54},
-	ColorGreen:   TrueColor{149, 189, 64},
-	ColorYellow:  TrueColor{255, 220, 0},
-	ColorBlue:    TrueColor{0, 116, 217},
-	ColorMagenta: TrueColor{177, 13, 201},
-	ColorCyan:    TrueColor{105, 206, 245},
-	ColorWhite:   TrueColor{255, 255, 255},
+	ColorBlack:   {0, 0, 0},
+	ColorRed:     {255, 65, 54},
+	ColorGreen:   {149, 189, 64},
+	ColorYellow:  {255, 220, 0},
+	ColorBlue:    {0, 116, 217},
+	ColorMagenta: {177, 13, 201},
+	ColorCyan:    {105, 206, 245},
+	ColorWhite:   {255, 255, 255},
 }
 
-// Every color has a pre- and a suffix
+// Color has a pre- and a suffix
 type Color interface {
 	getPrefix(p Parser) string
 	getSuffix(p Parser) string
@@ -109,7 +109,7 @@ func (ac AnsiColor) getPrefix(p Parser) string {
 	}
 
 	return ""
-	
+
 }
 
 // Suffix for ansi color
