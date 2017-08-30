@@ -1,6 +1,6 @@
 # FIGlet for Go
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/probandula/figlet4go)](https://goreportcard.com/report/github.com/probandula/figlet4go)
+[![Go Report Card](https://goreportcard.com/badge/github.com/mbndr/figlet4go)](https://goreportcard.com/report/github.com/mbndr/figlet4go)
 
 `figlet4go` is a go library forked from  which is a port of [FIGlet](http://www.figlet.org/) to Golang.  
 With `figlet4go` it's easy to create **ascii text banners** in the command-line or with the given api.
@@ -13,7 +13,7 @@ With `figlet4go` it's easy to create **ascii text banners** in the command-line 
 ## Installation
 
 ```
-$ go get -u github.com/probandula/figlet4go/...
+$ go get -u github.com/mbndr/figlet4go/...
 ```
 
 ## Usage
@@ -29,7 +29,7 @@ For a usage instruction read the commands usage with `figlet4go -h`.
 ### Basic
 You have to create a renderer (`ascii`) and let it render the desired string through the `Render` method. After that you can simply print the returned string.
 ```go
-import "github.com/probandula/figlet4go"
+import "github.com/mbndr/figlet4go"
 
 // ...
 
@@ -45,7 +45,7 @@ The colors given in the `[]figlet4go.Color` slice are repeating if the string is
 If you use a `TrueColor` color, you have to ensure that your [terminal supports](https://gist.github.com/XVilka/8346728/) it.  
 If you use a `AnsiColor` with an `TrueColor` only parser (f.e. `ParserHTML`), `TrueColor` objects are automatically generated.
 ```go
-import "github.com/probandula/figlet4go"
+import "github.com/mbndr/figlet4go"
 
 // ...
 
@@ -72,7 +72,7 @@ fmt.Print(renderStr)
 If you want to use another font, you have to specify the name of the font as in this example.  
 Is the font you want to use not [included](#builtin) you have to load the font manually with the `LoadFont` method. This method will walk the path recursively and load all `.flf` files.
 ```go
-import "github.com/probandula/figlet4go"
+import "github.com/mbndr/figlet4go"
 
 // ...
 
@@ -91,7 +91,7 @@ fmt.Print(renderStr)
 ### Other parser
 A Parser can be set through the `GetParser` function with a valid key
 ```go
-import "github.com/probandula/figlet4go"
+import "github.com/mbndr/figlet4go"
 
 // ...
 
