@@ -2,13 +2,13 @@
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/mbndr/figlet4go)](https://goreportcard.com/report/github.com/mbndr/figlet4go)
 
-`figlet4go` is a go library forked from  which is a port of [FIGlet](http://www.figlet.org/) to Golang.  
+`figlet4go` is a go library which is a port of [FIGlet](http://www.figlet.org/) to Golang.  
 With `figlet4go` it's easy to create **ascii text banners** in the command-line or with the given api.
 
 ![screenshot](./screenshot/figlet4go.png)
 
 
-**This Repository used to be a fork of [getwe/figlet4go](https://github.com/getwe/figlet4go), but changed so much that it's not compatible anymore**
+This Repository used to be a fork of [getwe/figlet4go](https://github.com/getwe/figlet4go), but I changed so much that it's not compatible anymore
 
 ## Installation
 
