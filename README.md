@@ -130,10 +130,11 @@ The default font is `standard`. These are the builtin fonts:
 Other fonts can mainly be found on [figlet](http://www.figlet.org). You have to load them as in [this example](#other-font).
 
 ## Todo
-- [ ] Tests?
+- [ ] Tests
 - [ ] automatically the perfect char margin
 - [ ] Linebreak possible?
 - [ ] Pointer-Value standarization
+- [ ] Parser as interface
 - [x] Cli client
 - [x] Colors in the cli client
 - [x] No dependencies (fatih/color)
