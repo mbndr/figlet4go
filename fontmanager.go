@@ -122,14 +122,26 @@ func (fm *fontManager) loadBuildInFont() error {
 		if err != nil {
 			return err
 		}
-		// Get the font
-		font, err := parseFontContent(string(fontStr))
+		// Load the font
+		err = fm.loadBinDataFont(string(fontStr), name)
 		if err != nil {
 			return err
 		}
-		// Register the font object in the fontLib
-		fm.fontLib[name] = font
 	}
+
+	return nil
+}
+
+// Load a bindata font
+func (fm *fontManager) loadBinDataFont(fontStr string, fontName string) error {
+
+	// Get the font
+	font, err := parseFontContent(fontStr)
+	if err != nil {
+		return err
+	}
+	// Register the font object in the fontLib
+	fm.fontLib[fontName] = font
 
 	return nil
 }
