@@ -39,6 +39,11 @@ func (ar *AsciiRender) LoadFont(fontPath string) error {
 	return ar.fontMgr.loadFontList(fontPath)
 }
 
+// LoadBinDataFont loads provided font binary
+func (ar *AsciiRender) LoadBindataFont(fontBinary []byte, fontName string) error {
+	return ar.fontMgr.loadBindataFont(fontBinary, fontName)
+}
+
 // Render renders a string with the default options
 // Calls the RenderOpts method with a new RenderOptions object
 func (ar *AsciiRender) Render(str string) (string, error) {
