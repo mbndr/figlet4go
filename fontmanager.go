@@ -123,7 +123,7 @@ func (fm *fontManager) loadBuildInFont() error {
 			return err
 		}
 		// Load the font
-		err = fm.loadBinDataFont(string(fontStr), name)
+		err = fm.loadBindataFont(fontStr, name)
 		if err != nil {
 			return err
 		}
@@ -133,10 +133,10 @@ func (fm *fontManager) loadBuildInFont() error {
 }
 
 // Load a bindata font
-func (fm *fontManager) loadBinDataFont(fontStr string, fontName string) error {
+func (fm *fontManager) loadBindataFont(fontBinary []byte, fontName string) error {
 
 	// Get the font
-	font, err := parseFontContent(fontStr)
+	font, err := parseFontContent(string(fontBinary))
 	if err != nil {
 		return err
 	}
